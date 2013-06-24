@@ -48,7 +48,7 @@ module JSONReadWrite
   # 
   # Raises NoFileError if the json file doesn't exist
   def self.updateJSONFileWithObject(fileName, object)
-    raise ArgumentError, "Expected object to be an instance of Array or Hash, was #{object.class}" unless object.is_a?(Array) || object.is_a?(Hash)
+    # raise ArgumentError, "Expected object to be an instance of Array or Hash, was #{object.class}" unless object.is_a?(Array) || object.is_a?(Hash)
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     object.writeToFile(jsonPath(fileName), atomically: true)
   end

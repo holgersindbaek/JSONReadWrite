@@ -1,12 +1,14 @@
-# PListReadWrite
+# JSONReadWrite
 
-A Rubymotion module to make light work of writing to and reading from plist files.
+A Rubymotion module to make light work of writing to and reading from JSON files.
+
+Basically a copy of PlistReadWrite from the guys at Katana Labs - https://github.com/KatanaCode/PListReadWrite.
 
 ## Installation
 
 Add the following to your app's Gemfile
 
-    gem 'plist_read_write'
+    gem 'json_read_write'
 
 Alternatively, it's a small file so you can just copy/paste it directly to your app.
 
@@ -14,54 +16,41 @@ Alternatively, it's a small file so you can just copy/paste it directly to your 
 
 Lets assume we have this plist file in our resources directory...
 
-``` xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>jim</key>
-    <dict>
-      <key>name</key>
-      <string>Jim</string>
-      <key>email</key>
-      <string>jim@jimsemail.com</string>
-    </dict>
-    <key>jane</key>
-    <dict>
-      <key>name</key>
-      <string>Jane</string>
-      <key>email</key>
-      <string>jane@janesemail.com</string>
-    </dict>
-  </dict>
-</plist>
+``` json
+{
+  "employees": [
+    { "firstName":"John" , "lastName":"Doe" }, 
+    { "firstName":"Anna" , "lastName":"Smith" }, 
+    { "firstName":"Peter" , "lastName":"Jones" }
+  ]
+}
 ```
 
 ... and we want to copy it over to our app's documents directory so we can update/edit the plist.
 
 ``` ruby
 
-# Check if the plist exists in our documents dir
-PListRW.exist?(:users, :documentsDir) # => false
+# Check if the json exists in our documents dir
+JSONReadWrite.exist?(:employees, :documentsDir) # => false
 
-# Check if the plist exists in our main bundle
-PListRW.exist?(:users, :mainBundle) # => true
+# Check if the json exists in our main bundle
+JSONReadWrite.exist?(:employees, :mainBundle) # => true
 
-# Copy the plist file from the main bundle to the documents dir
-PListRW.copyPlistFileFromBundle(:users)
+# Copy the json file from the main bundle to the documents dir
+JSONReadWrite.copyJSONFileFromBundle(:employees)
 
-# Fetch the object from the plist file
-@users_hash = PListRW.plistObject(:users, Hash) # => A hash containing the User data
+# Fetch the data from the json file
+@employees_hash = JSONReadWrite.jsonData(:employees) # => A hash containing the User data
 
 # Update the data
-@users_hash[:jim] # => { name: "Jim", email: "jim@jimsemail.com" }
-@users_hash[:jim][:name] = 'James'
+@employees_hash[:employees] 
+@employees_hash[:employees][0][:firstName] = 'James'
 
-# Store the data back in the plist
-PListRW.updatePlistFileWithObject(:users, @users_hash)
+# Store the data back in the json
+JSONReadWrite.updateJSONFileWithObject(:employees, @employees_hash)
 
 # Check this worked OK
-PListRW.plistObject(:users, Hash)[:jim][:name] # => "James"
+JSONReadWrite.jsonData(:employees)[0][:firstName] # => "James"
 ```
 
 ## About Katana Code
