@@ -14,7 +14,7 @@ Alternatively, it's a small file so you can just copy/paste it directly to your 
 
 ## Example Usage
 
-Lets assume we have this plist file in our resources directory...
+Lets assume we have this json file in our resources directory...
 
 ``` json
 {
@@ -26,7 +26,7 @@ Lets assume we have this plist file in our resources directory...
 }
 ```
 
-... and we want to copy it over to our app's documents directory so we can update/edit the plist.
+... and we want to copy it over to our app's documents directory so we can update/edit the json.
 
 ``` ruby
 
@@ -40,14 +40,14 @@ JSONReadWrite.exist?(:employees, :mainBundle) # => true
 JSONReadWrite.copyJSONFileFromBundle(:employees)
 
 # Fetch the data from the json file
-@employees_hash = JSONReadWrite.jsonData(:employees) # => A hash containing the User data
+@employees = JSONReadWrite.jsonData(:employees) # => A hash containing the User data
 
 # Update the data
-@employees_hash[:employees] 
-@employees_hash[:employees][0][:firstName] = 'James'
+@employees[:employees] 
+@employees[:employees][0][:firstName] = 'James'
 
 # Store the data back in the json
-JSONReadWrite.updateJSONFileWithObject(:employees, @employees_hash)
+JSONReadWrite.updateJSONFileWithObject(:employees, @employees)
 
 # Check this worked OK
 JSONReadWrite.jsonData(:employees)[0][:firstName] # => "James"
