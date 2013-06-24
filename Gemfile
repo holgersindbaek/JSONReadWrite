@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in PListReadWrite.gemspec
+# Specify your gem's dependencies in JsonReadWrite.gemspec
 gemspec
