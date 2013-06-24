@@ -62,8 +62,8 @@ module JSONReadWrite
   def self.jsonData(fileName)
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     path   = jsonPath(fileName)
-    string = String.new(NSString.stringWithContentsOfFile(pub_path))
-    pub_string.nsdata
+    string = String.new(NSString.stringWithContentsOfFile(path))
+    string.nsdata
   end
 
   # Copy the template <fileName>.json file from the resources dir to the application's documents directory
