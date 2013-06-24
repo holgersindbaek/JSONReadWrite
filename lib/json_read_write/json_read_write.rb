@@ -59,16 +59,11 @@ module JSONReadWrite
   # klass    - The name of the Class which is being stored in the json. Must be either a Hash or Array (defaults: Hash)
   #
   # Returns an Array or Hash with the file content
-  def self.jsonObject(fileName, klass = Hash)
+  def self.jsonData(fileName)
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     path   = jsonPath(fileName)
-    if klass == Hash
-      NSMutableDictionary.dictionaryWithContentsOfFile(path)
-    elsif klass == Array
-      NSMutableArray.arrayWithContentsOfFile(path)
-    else
-      raise ArgumentError, "Expected klass to be Array or Hash, was #{klass}"
-    end
+    string = String.new(NSString.stringWithContentsOfFile(pub_path))
+    pub_string.nsdata
   end
 
   # Copy the template <fileName>.json file from the resources dir to the application's documents directory
