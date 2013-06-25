@@ -63,6 +63,7 @@ module JSONReadWrite
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     path   = jsonPath(fileName)
     string = String.new(NSString.stringWithContentsOfFile(path))
+    ap string
     string.nsdata
   end
 
