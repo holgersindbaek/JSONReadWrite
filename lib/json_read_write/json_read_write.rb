@@ -53,7 +53,7 @@ module JSONReadWrite
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     # object.writeToFile(jsonPath(fileName), atomically: true)
     ap "THIS IS A TEST"
-    object.to_s.writeToFile(path, atomically:true, encoding:NSASCIIStringEncoding, error:nil)
+    object.to_s.writeToFile(jsonPath(fileName), atomically:true, encoding:NSASCIIStringEncoding, error:nil)
   end
 
   # The object containing the data stored in the json
