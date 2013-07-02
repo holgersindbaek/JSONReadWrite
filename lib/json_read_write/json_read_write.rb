@@ -49,11 +49,11 @@ module JSONReadWrite
   # Raises NoFileError if the json file doesn't exist
   def self.updateJSONFileWithObject(fileName, object)
     ap "OBJECT:"
-    ap object
+    ap object.to_s.nsdata
     raise ArgumentError, "Expected object to be an instance of Array or Hash, was #{object.class}" unless object.is_a?(Array) || object.is_a?(Hash)
     raise NoFileError, "Cannot find json file: #{fileName}.json in documents directory" unless exist?(fileName)
     # object.writeToFile(jsonPath(fileName), atomically: true)
-    object.to_s.writeToFile(jsonPath(fileName), atomically:true, encoding:NSASCIIStringEncoding, error:nil)
+    object.to_s.nsdata.writeToFile(jsonPath(fileName), atomically:true, encoding:NSUTF8StringEncoding, error:nil)
   end
 
   # The object containing the data stored in the json
